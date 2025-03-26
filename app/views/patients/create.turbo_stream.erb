@@ -1,0 +1,2 @@
+<%= turbo_stream.append "patients_list", partial: "patients/patient", locals: { patient: @patient } %>
+<%= turbo_stream.replace "form_container", partial: "patients/form", locals: { patient: Patient.new } %>

@@ -1,0 +1,34 @@
+<div class="grid grid-cols-2" data-controller="article">
+
+  
+  
+	<div class="col-span-1">
+    <div class="p-4 border rounded-md shadow-md mb-4">
+      <div>Total Articles: <span id="count_article"><%= @articles.count %></span></div>
+      <%= form_with model: Article.new, data: { action: "submit->article#create" } do |f| %>
+        <div class="py-2">
+          <%= f.label :title %>
+          <%= f.text_field :title, data: { article_target: "title" } %>
+          <span class="text-red-500 hidden" data-article-target="titleError">This field is required</span>
+        </div>
+        <div>
+          <%= f.label :content %>
+          <%= f.text_field :content, data: { article_target: "content" } %>
+          <span class="text-red-500 hidden" data-article-target="contentError">This field is required</span>
+        </div>
+        <%= f.submit "Create" %>
+      <% end %>
+    </div>
+
+    <div id="articles" class="">
+      <div class="col-span-1 ml-5">
+        <% @articles.each do |article| %>
+          <%= render partial: "articles/article", locals: { article: article} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-1 ml-5">
+    <%= turbo_frame_tag :article_details %>
+  </div>
+</div>

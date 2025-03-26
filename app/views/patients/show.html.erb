@@ -1,0 +1,12 @@
+<%= turbo_frame_tag :patient_details do %>
+  <div class="border p-4 rounded-md shadow-md mb-2">
+    <h1>Patient Details</h1>
+    <div class="flex"><span class="font-bold">Name: </span><span> <%= @patient.fullname %></span></div>
+    <div class="flex"><span class="font-bold">Age: </span><span> <%= @patient.age %></span></div>
+    <div class="flex"><span class="font-bold">Phone: </span><span> <%= @patient.phone_number %></span></div>
+
+    <%= link_to "New Appointment", new_departments_appointment_path(patient_id: @patient.id), data: { turbo_frame: "patient_details" } %>
+  </div>
+<% end %>
+
+<turbo-frame id="patient_details"></turbo-frame>

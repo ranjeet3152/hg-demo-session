@@ -1,0 +1,13 @@
+<%= form_with model: article, data: { turbo_frame: "articles", turbo_action: "submit->article#create" } do |f| %>
+  <div class="py-2">
+    <%= f.label :title %>
+    <%= f.text_field :title, data: { article_target: "title" } %>
+    <span class="text-red-500 hidden" data-article-target="titleError">This field is required</span>
+  </div>
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content, data: { article_target: "content" } %>
+    <span class="text-red-500 hidden" data-article-target="contentError">This field is required</span>
+  </div>
+  <%= f.submit "Create", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+<% end %>

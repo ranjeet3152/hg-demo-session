@@ -1,0 +1,17 @@
+<turbo-frame id="appointment_form_container">
+  <%= form_with model: [:departments, appointment], data: { turbo: true } do |f| %>
+    <b>Create Appointment</b><br>
+      <%= f.hidden_field :patient_id, { value: @patient.id } %>
+      <%= f.hidden_field :patient_name, { value: @patient.fullname } %>
+      <%= f.label :patient_name %>
+      <%= f.text_field :fullname, value: @patient.fullname, readonly: true %>
+
+      <%= f.label :status %>
+      <%= f.text_field :status %>
+
+      <%= f.label :department_name %>
+      <%= f.text_field :department_name %>
+
+    <%= f.submit "Save" %>
+  <% end %>
+</turbo-frame>

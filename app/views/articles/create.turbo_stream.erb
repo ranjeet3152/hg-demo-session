@@ -1,0 +1,4 @@
+<%= turbo_stream.append "articles", partial: "articles/article", locals:{ article: @article } %>
+<%= turbo_stream.update "count_article" do %>
+  <%= @articles %>
+<% end %>

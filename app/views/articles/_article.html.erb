@@ -1,0 +1,22 @@
+<%= turbo_frame_tag dom_id(article) do %>
+  <div class="border p-4 rounded-md shadow-md mb-2">
+    <%= link_to article, "data-turbo-prefetch": false, "data-turbo-frame": :article_details, class: "" do %>
+      <h2 class="font-bold"><%= article.title %></h2>
+      <p><%= article.content %></p>
+      <p>Status: <span id="article_status_<%= article.id %>"><%= article.state %></span></p>
+    <% end %>
+    <div class="flex gap-2 mt-2">
+      <%= link_to "Edit", edit_article_path(article), 
+                  data: { turbo_frame: dom_id(article) }, 
+                  class: "bg-yellow-500 text-white px-4 py-2 rounded" %>
+
+      <%= button_to "Delete", article_path(article), 
+            method: :delete, 
+            data: { turbo_confirm: "Are you sure?" }, 
+            form: { data: { turbo_stream: true } }, 
+            class: "bg-red-500 text-white px-4 py-2 rounded" %>
+    </div>
+  </div>
+<% end %>
+
+
