@@ -1,0 +1,4 @@
+<%= turbo_frame_tag :task_details do %>
+  <div class="flex"><span class="font-bold">Title: </span><span> <%= @task.title %></span></div>
+  <div class="flex"><span class="font-bold">Description: </span><span> <%= @task.description %></span></div>
+<% end %>

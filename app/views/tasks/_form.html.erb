@@ -1,0 +1,13 @@
+<%= form_with model: task, data: { turbo_frame: "tasks", turbo_action: "submit->task#create" } do |f| %>
+  <div class="py-2">
+    <%= f.label :title %>
+    <%= f.text_field :title, data: { task_target: "title" } %>
+    <span class="text-red-500 hidden" data-task-target="titleError">This field is required</span>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, data: { task_target: "description" } %>
+    <span class="text-red-500 hidden" data-task-target="descriptionError">This field is required</span>
+  </div>
+  <%= f.submit "Create", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+<% end %>

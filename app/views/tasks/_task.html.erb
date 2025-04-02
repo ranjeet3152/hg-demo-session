@@ -1,0 +1,31 @@
+<%= turbo_frame_tag dom_id(task) do %>
+  <div class="border p-4 rounded-md shadow-md mb-2">
+    <%= link_to task, "data-turbo-prefetch": false, "data-turbo-frame": :task_details, class: "" do %>
+      <h2 class="font-bold"><%= task.title %></h2>
+      <p><%= task.description %></p>
+      <p>Status: <span id="task_status_<%= task.id.to_s %>"><%= task.status %></span></p>
+    <% end %>
+    <div class="flex gap-2 mt-2">
+      <%= link_to "Edit", edit_task_path(task), 
+                  data: { turbo_frame: dom_id(task) }, 
+                  class: "bg-yellow-500 text-white px-4 py-2 rounded" %>
+
+      <% if task.status == 'completed' %>
+        <%= button_to "Delete", task_path(task), 
+              method: :delete, 
+              data: { turbo_confirm: "Are you sure?" }, 
+              form: { data: { turbo_stream: true } }, 
+              class: "bg-red-500 text-white px-4 py-2 rounded" %>
+      <% end %>
+
+      <% if task.status != 'completed' %>
+        <%= button_to "Change Status", change_status_task_path(task), 
+              method: :patch, 
+              data: { turbo_stream: true }, 
+              class: "bg-green-500 text-white px-4 py-2 rounded" %>
+        <% end %>
+    </div>
+  </div>
+<% end %>
+
+

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root "patients#index"
+  # root "patients#index"
+  root "tasks#index"
 
   # namespace :dashboards do
   #   get 'active_sessions/index'
@@ -17,11 +18,18 @@ Rails.application.routes.draw do
 
   # resources :articles
 
-  resources :patients
-  resources :admissions
-  resources :appointments
+  # resources :patients
+  # resources :admissions
+  # resources :appointments
 
-  namespace :departments do
-    resources :appointments
+  # namespace :departments do
+  #   resources :appointments
+  # end
+
+  resources :tasks do
+    member do
+      patch :change_status
+    end
   end
+  
 end

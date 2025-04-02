@@ -1,0 +1,45 @@
+<div class="grid grid-cols-2" data-controller="task">
+
+  
+  
+	<div class="col-span-1">
+    <%= turbo_stream_from "notifications" %>
+    <%= turbo_stream_from "tasks" %>
+      
+      <div class="border p-4 rounded-md shadow-md mb-2 mt-4 py-3 px-3">
+        <div><b>Stats:</b></div>
+        <div>Total tasks: <span id="count_task"><%= @tasks.count %></span></div>
+        <div>New tasks: <span id="new_task_count"><%= @new_tasks.count %></span></div>
+        <div>In-Progress tasks: <span id="inprogress_task_count"><%= @inprogress_tasks.count %></span></div>
+        <div>Completed tasks: <span id="completed_task_count"><%= @completed_tasks.count %></span></div>
+      </div>
+
+
+    <div class="p-4 border rounded-md shadow-md mb-4">
+      <%= form_with model: Task.new, data: { action: "submit->task#create" } do |f| %>
+        <div class="py-2">
+          <%= f.label :title %>
+          <%= f.text_field :title, data: { task_target: "title" } %>
+          <span class="text-red-500 hidden" data-task-target="titleError">This field is required</span>
+        </div>
+        <div>
+          <%= f.label :description %>
+          <%= f.text_field :description, data: { task_target: "content" } %>
+          <span class="text-red-500 hidden" data-task-target="contentError">This field is required</span>
+        </div>
+        <%= f.submit "Create" %>
+      <% end %>
+    </div>
+
+    <div id="tasks-list" class="">
+      <div class="col-span-1 ml-5">
+        <% @tasks.each do |task| %>
+          <%= render partial: "tasks/task", locals: { task: task} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-1 ml-5">
+    <%= turbo_frame_tag :task_details %>
+  </div>
+</div>
