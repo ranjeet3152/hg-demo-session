@@ -2,6 +2,7 @@
   <%= form_with model: @task, local: false do |f| %>
     <tr id="<%= dom_id(@task) %>">
       <td><%= f.text_field :title, class: "border p-2 w-full" %></td>
+      <td><%= f.text_field :description, class: "border p-2 w-full" %></td>
       <td>
         <%= f.submit "Save", class: "bg-green-500 text-white px-4 py-2 rounded" %>
       </td>
